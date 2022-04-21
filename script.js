@@ -8,8 +8,6 @@
 //   });
 //   reader.readAsDataURL(this.files[0]);
 // });
-
-
 document.querySelectorAll(".drop-zone__input").forEach((inputElement) => {
     const dropZoneElement = inputElement.closest(".drop-zone");
   
@@ -76,11 +74,13 @@ document.querySelectorAll(".drop-zone__input").forEach((inputElement) => {
       reader.readAsDataURL(file);
       reader.onload = () => {
         thumbnailElement.style.backgroundImage = `url('${reader.result}')`;
+        var image=document.getElementsByName("myFile");
+        console.log(image);
+        image.src=reader.result;
       };
     } else {
       thumbnailElement.style.backgroundImage = null;
     }
   }
   
-
 

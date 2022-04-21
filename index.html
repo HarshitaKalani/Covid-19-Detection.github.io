@@ -85,10 +85,14 @@
 			</nav>
 			<script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@1.5.2/dist/tf.min.js"></script>
 			<script src="https://unpkg.com/ml5@0.4.3/dist/ml5.min.js"></script>
+			<script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+
 			<!-- <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@1.5.2"></script>
 			<script src="https://cdnjs.cloudflare.com/ajax/libs/mocha/1.0.2/package/lib/browser/fs.js"></script> -->
 			<script>
+				
 				var loadFile = function (event) {
+					
 				var image = document.getElementById("image");
 				image.src = URL.createObjectURL(event.target.files[0]);
 				document.getElementById("image").style.display="block";
@@ -154,6 +158,51 @@
 					// $('#number').html(predicted);
 					console.log(predicted);
 					console.log(scores);
+						
+					var chart = new CanvasJS.Chart("chartContainer3", {
+					theme: "light2", // "light1", "light2", "dark1", "dark2"
+					exportEnabled: true,
+					animationEnabled: true,
+					//title: {
+					//  text: "Likelihood of digits"
+					//},
+					data: [{
+						type: "pie",
+						startAngle: 25,
+						toolTipContent: "<b>{label}</b>: {y}%",
+						showInLegend: "true",
+						legendText: "{label}",
+						indexLabelFontSize: 16,
+						indexLabel: "{label} - {y}%",
+						dataPoints: [
+						{ y: scores[0], label: "0" },
+						{ y: scores[1], label: "1" },
+						]
+					}]
+					});
+					chart.render();
+
+					var chart2 = new CanvasJS.Chart("chartContainer2", {
+					animationEnabled: true,
+					theme: "light2", // "light1", "light2", "dark1", "dark2"
+					// title:{
+					// text: "Likelihood"
+					// },
+					axisY: {
+					title: "Likelihood"
+					},
+					data: [{        
+					type: "column",  
+					showInLegend: true, 
+					legendMarkerColor: "grey",
+					legendText: "Digit",
+					dataPoints: [      
+					{ y: scores[0], label: "Non Covid" },
+					{ y: scores[1], label: "Covid" },
+					]
+					}]
+				});
+					chart2.render();
 					});
 				//  classifier.predict(document.getElementById("image"), 
 				// 		  function (err, results) {
@@ -166,7 +215,7 @@
 		<!-- Home -->
 			<article id="top" class="wrapper style1">
 				<div class="container">
-					<div class="row">
+					<div class="row" style="margin-right: 10px;">
 						<div class="col-4 col-5-large col-12-medium">
 							<!-- <span class="image fit"><img src="images/pic00.jpg" alt="" /></span>
 							 -->
@@ -199,39 +248,61 @@
 
 		<!-- Work -->
 			<article id="work" class="wrapper style2">
-				<div class="container">
+				<div class="container" >
 					<header>
 						<h2>Have a look at the results.</h2>
 
 					</header>
+					
 					<div class="row aln-center">
 						<div class="col-4 col-6-medium col-12-small">
-							<section class="box style1">
+						
+							<!-- <section class="box style1">
 								<span class="icon featured fa-comments"></span>
 								<h3>CNN</h3>
-								<p>--Bar chart--</p>
-							</section>
+								<p>Bar Chart</p>
+								
+							</section> -->
+							
+						<div id="chartContainer2" class="col-4 col-6-medium col-12-small">
+							<script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
 						</div>
+						</div>
+						
+						<!-- <div id="chartContainer3" class="col-4 col-6-medium col-12-small">
+							<script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+						</div> -->
 						<div class="col-4 col-6-medium col-12-small">
-							<section class="box style1">
+							
+							<!-- <section class="box style1">
 								<span class="icon solid featured fa-camera-retro"></span>
 								<h3>Decision tree Classfier</h3>
 								<p>--bar chart--</p>
-							</section>
+								
+							</section> -->
+							<div id="chartContainer3" class="col-4 col-6-medium col-12-small">
+								<script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+							</div>
 						</div>
+						
 						<div class="col-4 col-6-medium col-12-small">
 							<section class="box style1">
 								<span class="icon featured fa-thumbs-up"></span>
-								<h3>xxx</h3>
-								<p>--pie chart--</p>
+								<h3>Using VGG-19</h3>
+								<p>lIKELIHOODS</p>
 							</section>
+							
 						</div>
+
 					</div>
-					<footer>
+					<!-- <footer>
 						<p>The result:</p>
 						<a href="#portfolio" class="button large scrolly">See some of my recent work</a>
-					</footer>
+					</footer> -->
 				</div>
+				<!-- <div id="chartContainer2" class="col-4 col-6-medium col-12-small" >
+					<script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+				</div> -->
 			</article>
 
 		<!-- Portfolio -->

@@ -56,7 +56,7 @@ This is the main file containing EDA, preprocessing, application of various mach
   - EfficientNet B3
   - U Net (For lung Segmentation)
   - Saving .json file and weights for deployment
-### 2. Lung Segmentation.ipynb 
+### [2. Lung Segmentation.ipynb](https://github.com/Pranavchiku/Covid-19-Detection.github.io/blob/e08fa7499a7e5ecd283af59e45b3fe134f65cefc/Lung_Segmenation.ipynb)
 Lung segmentation is performed in this file, using pre-trained weights of u net model.
 - U Net 
 - Segmenting original images

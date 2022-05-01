@@ -3,6 +3,7 @@
 
 [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/drive/1TEC2gr6KILXHPzBMFObF3EFKH5zMRFH-?usp=sharing)
 [![Google Chrome](https://img.shields.io/badge/Google%20Chrome-4285F4?style=for-the-badge&logo=GoogleChrome&logoColor=white)](https://harshitakalani.github.io/Covid-19-Detection.github.io/)
+[![LaTeX](https://img.shields.io/badge/latex-%23008080.svg?style=for-the-badge&logo=latex&logoColor=white)]()
 ## Overview:
 COVID- 19 global pandemic affects health care and lifestyle worldwide,
 and its early detection is critical to control cases’ spreading and mortality.

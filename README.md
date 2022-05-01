@@ -32,7 +32,7 @@ The dataset contains two main folders, one for the X-ray images, which includes 
 - [Seaborn: ](https://seaborn.pydata.org/) Data visualisation library
 - [OpenCV2: ](https://pypi.org/project/opencv-python/) Image Preprocessing library
 ## Pipeline:
-### 1. Covid-19 Detection using Chest X-Ray.ipynb
+### [1. Covid-19 Detection using Chest X-Ray.ipynb](https://github.com/HarshitaKalani/Covid-19-Detection.github.io/blob/bd96ea2f33edb90149cf1f73b2c1bb0f9f9cf441/COVID_19_Detection_using_Chest_X_Ray.ipynb)
 This is the main file containing EDA, preprocessing, application of various machine learning and deep learning models.
 - Installing libraries and dependencies
 - Importing the dataset

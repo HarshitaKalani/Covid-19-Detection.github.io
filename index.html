@@ -6,68 +6,41 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 		<link rel="stylesheet" href="assets/css/main.css" />
 		<style>
-			/* body{
-				display:flex;
-				justify-content: center;
-				align-items: center;
-				gap:10px;
-				flex-direction: column;
-				height: 100vh;
-			} */
-			/* #display_image{
-				width: 375px;
-				height: 211px;
-				border: 1px solid black;
-				background-position: center;
-				background-size: cover;
-			} */
 			.drop-zone {
-  max-width: 350px;
-  height: 350px;
-  padding: 25px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  font-family: "Quicksand", sans-serif;
-  font-weight: 500;
-  font-size: 20px;
-  cursor: pointer;
-  color: #cccccc;
-  border: 4px dashed #009578;
-  border-radius: 10px;
-}
+			max-width: 350px;
+			height: 350px;
+			padding: 25px;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			text-align: center;
+			font-family: "Quicksand", sans-serif;
+			font-weight: 500;
+			font-size: 20px;
+			cursor: pointer;
+			color: #cccccc;
+			border: 4px dashed #009578;
+			border-radius: 10px;
+			}
 
-.drop-zone--over {
-  border-style: solid;
-}
+			.drop-zone--over {
+			border-style: solid;
+			}
 
-.drop-zone__input {
-  display: none;
-}
+			.drop-zone__input {
+			display: none;
+			}
 
-.drop-zone__thumb {
-  width: 100%;
-  height: 100%;
-  border-radius: 10px;
-  overflow: hidden;
-  background-color: #cccccc;
-  background-size: cover;
-  position: relative;
-}
+			.drop-zone__thumb {
+			width: 100%;
+			height: 100%;
+			border-radius: 10px;
+			overflow: hidden;
+			background-color: #cccccc;
+			background-size: cover;
+			position: relative;
+			}
 
-/* .drop-zone__thumb::after {
-  content: attr(data-label);
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  padding: 5px 0;
-  color: #ffffff;
-  background: rgba(0, 0, 0, 0.75);
-  font-size: 14px;
-  text-align: center;
-} */
 
 		</style>
 		
@@ -78,17 +51,14 @@
 			<nav id="nav">
 				<ul class="container">
 					<li><h2><a href="#top">Covid-19 Analysis</a></h2></li>
-					<!-- <li><a href="#work">Work</a></li>
-					<li><a href="#portfolio">Portfolio</a></li>
-					<li><a href="#contact">Contact</a></li> -->
 				</ul>
 			</nav>
+
 			<script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@1.5.2/dist/tf.min.js"></script>
 			<script src="https://unpkg.com/ml5@0.4.3/dist/ml5.min.js"></script>
 			<script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
 
-			<!-- <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@1.5.2"></script>
-			<script src="https://cdnjs.cloudflare.com/ajax/libs/mocha/1.0.2/package/lib/browser/fs.js"></script> -->
+			<!-- Script to fetch image and pre process starts here -->
 			<script>
 				
 				var loadFile = function (event) {
@@ -96,14 +66,6 @@
 				image.src = URL.createObjectURL(event.target.files[0]);
 				document.getElementById("image").style.display="block";
 				};
-				
-				// const classifier = ml5.imageClassifier
-				//  ("MobileNet", modelLoaded);
-			
-				//  // When the model is loaded
-				//  function modelLoaded() {
-				//  console.log("Model Loaded!");
-				//  }
 
 				tf.loadLayersModel("VGG19/model.json").then(function(model) {
 				window.model = model;
@@ -115,95 +77,78 @@
 					var canvas = document.createElement('canvas');
 					var context = canvas.getContext('2d');
 					var img = document.getElementById('image');
-					// processImage(img.src);
+
 					canvas.width = 224;
 					canvas.height = 224;
 					context.drawImage(img, 0, 0 );
+
 					var myData = context.getImageData(0, 0, 224, 224).data;
-					console.log(myData);
-					console.log(myData.length);
 					var normalArray = Array.from(myData);
-					console.log(normalArray.length);
+					
 					var input = [];
 					for(var i = 0; i < myData.length; i += 4) {
 					input.push(myData[i]);
 					}
+
 					var input2=[input,input,input];
 					var inputrray = Array.from(input2);
-					console.log(inputrray.length);
-					console.log(input.length);
-					window.model.predict([tf.tensor(input).reshape([1, 224, 224, 1])]).array().then(function(scores){
-					scores = scores[0];
-					predicted = scores.indexOf(Math.max(...scores));
-					// $('#number').html(predicted);
-					console.log(predicted);
-					console.log(scores);
-						
-					var chart = new CanvasJS.Chart("chartContainer3", {
-					theme: "light2", // "light1", "light2", "dark1", "dark2"
-					exportEnabled: true,
-					animationEnabled: true,
-					//title: {
-					//  text: "Likelihood of digits"
-					//},
-					data: [{
-						type: "pie",
-						startAngle: 25,
-						toolTipContent: "<b>{label}</b>: {y}%",
-						showInLegend: "true",
-						legendText: "{label}",
-						indexLabelFontSize: 16,
-						indexLabel: "{label} - {y}%",
-						dataPoints: [
-						{ y: scores[0], label: "Non-Covid" },
-						{ y: scores[1], label: "Covid" },
-						]
-					}]
-					});
-					document.getElementById('covidLikelihood').innerHTML = 'Likelihood of Covid + is ' + scores[1].toFixed(2).toString();
-					document.getElementById('nonCovidLikelihood').innerHTML = 'Likelihood of Covid - is ' + scores[0].toFixed(2).toString();
-					chart.render();
 
-					var chart2 = new CanvasJS.Chart("chartContainer2", {
-					animationEnabled: true,
-					theme: "light2", // "light1", "light2", "dark1", "dark2"
-					// title:{
-					// text: "Likelihood"
-					// },
-					axisY: {
-					title: "Likelihood"
-					},
-					data: [{        
-					type: "column",  
-					showInLegend: true, 
-					legendMarkerColor: "grey",
-					legendText: "Digit",
-					dataPoints: [      
-					{ y: scores[0], label: "Non Covid" },
-					{ y: scores[1], label: "Covid" },
-					]
-					}]
-				});
-					chart2.render();
-					});
-				//  classifier.predict(document.getElementById("image"), 
-				// 		  function (err, results) {
-				// 			//   alert(results[0].label);
-				// 			alert(results[0].label);
-				// 		  });
-				}
+					window.model.predict([tf.tensor(input).reshape([1, 224, 224, 1])]).array().then(function(scores){
+						scores = scores[0];
+						predicted = scores.indexOf(Math.max(...scores));
+							
+						var chart = new CanvasJS.Chart("chartContainer3", {
+							theme: "light2", // "light1", "light2", "dark1", "dark2"
+							exportEnabled: true,
+							animationEnabled: true,
+							data: [{
+								type: "pie",
+								startAngle: 25,
+								toolTipContent: "<b>{label}</b>: {y}%",
+								showInLegend: "true",
+								legendText: "{label}",
+								indexLabelFontSize: 16,
+								indexLabel: "{label} - {y}%",
+								dataPoints: [
+								{ y: scores[0], label: "Non-Covid" },
+								{ y: scores[1], label: "Covid" },
+								]
+							}]
+						});
+						document.getElementById('covidLikelihood').innerHTML = 'Likelihood of Covid + is ' + scores[1].toFixed(2).toString();
+						document.getElementById('nonCovidLikelihood').innerHTML = 'Likelihood of Covid - is ' + scores[0].toFixed(2).toString();
+						chart.render();
+
+						var chart2 = new CanvasJS.Chart("chartContainer2", {
+							animationEnabled: true,
+							theme: "light2", // "light1", "light2", "dark1", "dark2"
+							axisY: {
+							title: "Likelihood"
+							},
+							data: [{        
+								type: "column",  
+								showInLegend: true, 
+								legendMarkerColor: "grey",
+								legendText: "Covid vs NonCovid",
+								dataPoints: [      
+								{ y: scores[0], label: "Non Covid" },
+								{ y: scores[1], label: "Covid" },
+								]
+								}]
+							});
+						chart2.render();
+						});
+					}
 		  	</script>
-			  <!-- <script src="temo.js" type="module"></script> -->
+			
+			<!-- Script ends here-->
 		<!-- Home -->
 			<article id="top" class="wrapper style1">
 				<div class="container">
 					<div class="row" style="margin-right: 10px;">
 						<div class="col-4 col-5-large col-12-medium">
-							<!-- <span class="image fit"><img src="images/pic00.jpg" alt="" /></span>
-							 -->
 							 <div class="drop-zone">
 								<span class="drop-zone__prompt">Drop x-ray here or click to upload</span>
-								<!-- <input type="file" name="myFile" class="drop-zone__input" id="imageHere"> -->
 								<input type="file" accept="image/*" 
 									onchange="loadFile(event)" 
 									name="image" id="file" class="drop-zone__input"/>

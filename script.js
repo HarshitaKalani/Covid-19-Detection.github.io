@@ -1,13 +1,4 @@
-// const image_input = document.querySelector("#image_input");
 
-// image_input.addEventListener("change", function() {
-//   const reader = new FileReader();
-//   reader.addEventListener("load", () => {
-//     const uploaded_image = reader.result;
-//     document.querySelector("#display_image").style.backgroundImage = `url(${uploaded_image})`;
-//   });
-//   reader.readAsDataURL(this.files[0]);
-// });
 document.querySelectorAll(".drop-zone__input").forEach((inputElement) => {
     const dropZoneElement = inputElement.closest(".drop-zone");
   
@@ -57,30 +48,6 @@ document.querySelectorAll(".drop-zone__input").forEach((inputElement) => {
     if (dropZoneElement.querySelector(".drop-zone__prompt")) {
       dropZoneElement.querySelector(".drop-zone__prompt").remove();
     }
-  
-    // First time - there is no thumbnail element, so lets create it
-    // if (!thumbnailElement) {
-    //   thumbnailElement = document.createElement("div");
-    //   thumbnailElement.classList.add("drop-zone__thumb");
-    //   dropZoneElement.appendChild(thumbnailElement);
-    // }
-  
-    // thumbnailElement.dataset.label = file.name;
-  
-    // Show thumbnail for image files
-    // if (file.type.startsWith("image/")) {
-    //   const reader = new FileReader();
-  
-    //   reader.readAsDataURL(file);
-    //   reader.onload = () => {
-    //     thumbnailElement.style.backgroundImage = `url('${reader.result}')`;
-    //     var image=document.getElementsByName("myFile");
-    //     console.log(image);
-    //     image.src=reader.result;
-    //   };
-    // } else {
-    //   thumbnailElement.style.backgroundImage = null;
-    // }
   }
   
 

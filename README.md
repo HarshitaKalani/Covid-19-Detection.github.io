@@ -2,6 +2,7 @@
 
 
 [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/drive/1TEC2gr6KILXHPzBMFObF3EFKH5zMRFH-?usp=sharing)
+[![Google Chrome](https://img.shields.io/badge/Google%20Chrome-4285F4?style=for-the-badge&logo=GoogleChrome&logoColor=white)](https://harshitakalani.github.io/Covid-19-Detection.github.io/)
 ## Overview:
 COVID- 19 global pandemic affects health care and lifestyle worldwide,
 and its early detection is critical to control cases’ spreading and mortality.
@@ -18,6 +19,9 @@ under the transfer learning scheme; and finally, results analysis. The best
 models achieved a detection accuracy of COVID-19 around 96%
 ## Dataset Description
 The dataset contains two main folders, one for the X-ray images, which includes two separate sub-folders of 5500 Non-COVID images and 4044 COVID images.
+## Source of Dataset
+[X Ray Images](https://data.mendeley.com/datasets/8h65ywd2jr/3)\
+[Lung segmentation images](https://www.kaggle.com/code/nikhilpandey360/lung-segmentation-from-chest-x-ray-dataset/data)
 ## Built using:
 - [Scikit Learn: ](https://scikit-learn.org/stable/) ML Library used
 - [TensorFlow Keras: ](https://www.tensorflow.org/api_docs/python/tf/keras) ML Libraries used
@@ -28,16 +32,38 @@ The dataset contains two main folders, one for the X-ray images, which includes 
 - [OpenCV2: ](https://pypi.org/project/opencv-python/) Image Preprocessing library
 ## Pipeline:
 ### 1. Covid-19 Detection using Chest X-Ray.ipynb
-This is the main file with all the preprocessing, EDA, various Machine learning and Deep Learning Models.
-- Installing libraries and dependency
-- Importing the dataset - [Flight Price Prediction Dataset ](https://drive.google.com/drive/folders/1tHNt5vPyCyKRQIitvGmf48AI2tna5xSk) 
+This is the main file containing EDA, preprocessing, application of various machine learning and deep learning models.
+- Installing libraries and dependencies
+- Importing the dataset
 - Exploratory Data Analysis and Visualisation
-- Data Preprocessing - Basic preprocessing and cleaning the dataset
-- Extra regressor model to determine feature importance
-- Dividing the dataset into train and test
-- Applying Machine Learning models
-- Applying Deep Learning models
-  - Saving the weights and .json file for deployment
+- Data Preprocessing
+  - Normalisation
+  - Resizing image
+  - Lung Segmentation
+- Machine Learning Models
+  - Dimensonality reduction using PCA
+  - Decision tree Clasifier
+  - Random Forest Classifier
+  - XG Boost
+  - Light GBM
+  - Support vector machine
+  - Logistic Regression
+  - Comparitive Analysis
+- Deep learning Models (CNN)
+  - VGG 19
+  - Resnet50
+  - EfficientNet B3
+  - U Net (For lung Segmentation)
+  - Saving .json file and weights for deployment
+### 2. Lung Segmentation.ipynb 
+Lung segmentation is performed in this file, using pre-trained weights of u net model.
+- U Net 
+- Segmenting original images
 ## How to run:
-- Run the cells according to above mentioned pipeline
+- Run the cells in main file according to above mentioned pipeline
+## Collaborators:
+| Name | Year | Branch|
+| ------------- | ------------- | ------------- |
+| Harshita Kalani (B20CS019)  | Sophomore  | CSE |
+| Pranav Goswami (B20CS016) | Sophomore  | CSE |
 
